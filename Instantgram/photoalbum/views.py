@@ -1,4 +1,4 @@
-#from .models import Participant, Expense, ParticipantExpense
+from .models import Photo
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 #from django.urls import reverse
@@ -14,4 +14,5 @@ from django.views import View
 class MainView(View):
 
     def get(self, request):
-        return render(request, "main.html")
+        photos = Photo.objects.all().order_by('creation_date')
+        return render(request, "main.html", {'photos': photos})
